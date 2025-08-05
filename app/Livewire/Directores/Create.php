@@ -25,7 +25,7 @@ class Create extends Component
         ]);
 
         Director::create($validate);
-        //hice cambios
+        
         //dump("Se esta llamando al metodo store"); // Aquí puedes agregar la lógica para almacenar el director | usamos DUMP para depurar
        
         // Si no se usa la validación, se puede hacer así:
