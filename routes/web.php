@@ -2,6 +2,7 @@
 
 use App\Livewire\Directores\Create;
 use App\Livewire\Directores\Index;
+use App\Livewire\Directores\Update;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -25,5 +26,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('directores', Index::class)->name('directores.index');
 Route::get('directores/create', Create::class)->name('directores.create');
+Route::get('directores/{director}/edit', Update::class)->name('directores.edit');
 
 require __DIR__.'/auth.php';

@@ -37,6 +37,7 @@
                     <th scope="col" class="p-4">Cargo</th>
                     <th scope="col" class="p-4">Teléfono</th>
                     <th scope="col" class="p-4">Created At</th>
+                    <th scope="col" class="p-4">Acciones</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-outline dark:divide-outline-dark">
@@ -49,8 +50,19 @@
                     <td class="p-4">{{ $director->cargo ?? 'N/A' }}</td>
                     <td class="p-4">{{ $director->telefono ?? 'N/A' }}</td>
                     <td class="p-4">{{ $director->created_at->format('d-m-Y H:i') }}</td>
+                    <td class="p-4">
+                        <a href="{{ route('directores.edit', $director) }}" wire:navigate >
+                            <!-- success Button with Icon -->
+                            <button type="button" class="inline-flex justify-center items-center gap-2 whitespace-nowrap rounded-radius bg-success border border-success dark:border-success px-4 py-2 text-sm font-medium tracking-wide text-on-success transition hover:opacity-75 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:bg-success dark:text-on-success dark:focus-visible:outline-success">
+                                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-5 fill-on-success dark:fill-on-success" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M12 3.75a.75.75 0 01.75.75v6.75h6.75a.75.75 0 010 1.5h-6.75v6.75a.75.75 0 01-1.5 0v-6.75H4.5a.75.75 0 010-1.5h6.75V4.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                                </svg>
+                                Editar
+                            </button>
+                        </a>
+                    </td>
                 @empty
-                <tr>
+                <tr>  
                     <td colspan="6" class="p-4 text-center text-sm text-on-surface-strong dark:text-on-surface-dark-strong">
                         {{ __('No directors found.') }}
                     </td>
