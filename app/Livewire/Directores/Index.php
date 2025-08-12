@@ -10,13 +10,13 @@ class Index extends Component
 {
     use WithPagination;
 
-    //public $directores;
-
-    /*public function mount()
+    public function delete(Director $director)
     {
-        //$this->directores = Director::take(3)->get(); // Example: Fetching the first 3 directors
-        //$this->directores = [];
-    }*/
+        $director->delete(); // Elimina el director seleccionado
+
+        session()->flash('status', 'Director eliminado correctamente.'); // Mensaje de éxito
+        $this->redirectRoute('directores.index', navigate: true);
+    }
 
     public function render()
     {

@@ -15,6 +15,7 @@ class Update extends Component
         $this->form->setDirector($director); // Asigna la instancia del formulario al componente
     }
 
+    // Metodo para guardar la actualizacion
     public function save()
     {
         $this->form->update(); // Llama al método store del formulario DirectorForm

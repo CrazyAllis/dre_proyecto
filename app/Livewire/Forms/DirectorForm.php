@@ -8,7 +8,7 @@ use Livewire\Form;
 
 class DirectorForm extends Form
 {
-    public ?Director $director; // Instancia del modelo Director
+    public ?Director $director; // Instancia del modelo Director, se usa ? porque la propiedad puede ser nula
 
     // Otra forma de validación usando atributos de Livewire
     #[Validate('required', message: 'Los nombres son obligatorios')] //cuando se usa message, no se usa el mensaje de error por defecto y solo se puede añadir un mensaje por restricción sino se genera un error

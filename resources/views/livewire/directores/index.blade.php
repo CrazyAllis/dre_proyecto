@@ -50,7 +50,7 @@
                     <td class="p-4">{{ $director->cargo ?? 'N/A' }}</td>
                     <td class="p-4">{{ $director->telefono ?? 'N/A' }}</td>
                     <td class="p-4">{{ $director->created_at->format('d-m-Y H:i') }}</td>
-                    <td class="p-4">
+                    <td class="p-4 flex items-center gap-2">
                         <a href="{{ route('directores.edit', $director) }}" wire:navigate >
                             <!-- success Button with Icon -->
                             <button type="button" class="inline-flex justify-center items-center gap-2 whitespace-nowrap rounded-radius bg-success border border-success dark:border-success px-4 py-2 text-sm font-medium tracking-wide text-on-success transition hover:opacity-75 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:bg-success dark:text-on-success dark:focus-visible:outline-success">
@@ -60,6 +60,18 @@
                                 Editar
                             </button>
                         </a>
+                        
+                        <!-- danger Button -->
+                        <button 
+                            wire:click="delete({{ $director }})"
+                            wire:confirm="¿Estás seguro de que deseas eliminar este dato?" 
+                            type="button" 
+                            class="inline-flex justify-center items-center gap-2 whitespace-nowrap rounded-radius bg-danger border border-danger px-4 py-2 text-sm font-medium tracking-wide text-on-danger transition hover:opacity-75 text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-danger active:opacity-100 active:outline-offset-0 disabled:opacity-75 disabled:cursor-not-allowed dark:bg-danger dark:border-danger dark:text-onDanger dark:focus-visible:outline-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                            Eliminar
+                        </button>
                     </td>
                 @empty
                 <tr>  
