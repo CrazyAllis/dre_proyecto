@@ -3,6 +3,7 @@
 use App\Livewire\Directores\Create;
 use App\Livewire\Directores\Index;
 use App\Livewire\Directores\Update;
+use App\Livewire\Instituciones\Index as InstitucionesIndex;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -24,8 +25,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
+// Directores Routes
 Route::get('directores', Index::class)->name('directores.index');
 Route::get('directores/create', Create::class)->name('directores.create');
 Route::get('directores/{director}/edit', Update::class)->name('directores.edit');
+
+// Instituciones Routes
+Route::get('instituciones', InstitucionesIndex::class)->name('instituciones.index');
+
 
 require __DIR__.'/auth.php';
