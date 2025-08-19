@@ -10,6 +10,14 @@ class Index extends Component
 {
     use WithPagination;
 
+    public function delete(Institucion $institucion)
+    {
+        $institucion->delete(); // Elimina la institución seleccionada
+
+        session()->flash('status', 'Institución eliminada correctamente.'); // Mensaje de éxito
+        $this->redirectRoute('instituciones.index', navigate: true);
+    }
+
     public function render()
     {
         return view('livewire.instituciones.index', [

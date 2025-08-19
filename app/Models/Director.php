@@ -17,4 +17,11 @@ class Director extends Model
         'cargo',
         'telefono',
     ];
+
+    // Define la relación con el modelo Institucion
+    public function instituciones()
+    {
+        return $this->hasMany(Institucion::class);
+    }
+
 }

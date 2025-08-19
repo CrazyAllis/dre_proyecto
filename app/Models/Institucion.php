@@ -22,4 +22,10 @@ class Institucion extends Model
         'longitud',
         'director_id',
     ];
+
+        // Define la relación con el modelo Institucion
+        public function director()
+        {
+            return $this->belongsTo(Director::class);
+        }
 }
