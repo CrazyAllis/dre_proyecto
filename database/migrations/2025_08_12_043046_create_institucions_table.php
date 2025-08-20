@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('provincia', 100);
             $table->string('direccion', 150);
             $table->string('estado_institucion', 50);
-            $table->decimal('latitud', 10, 8)->nullable();
-            $table->decimal('longitud', 11, 8)->nullable();
+            $table->decimal('latitud', 18, 15)->nullable();
+            $table->decimal('longitud', 18, 15)->nullable();
             $table->foreignId('director_id')->nullable()->constrained('directors')->onDelete('set null');
             $table->timestamps();
         });

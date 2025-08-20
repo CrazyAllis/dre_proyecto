@@ -7,8 +7,8 @@
         <x-form.input wire:model='form.provincia' label="Provincia" name="form.provincia" placeholder="Ingrese provincia"/>
         <x-form.input wire:model='form.direccion' label="Dirección" name="form.direccion" placeholder="Ingrese dirección"/>
         <x-form.select wire:model='form.estado_institucion' label="Estado de la Institución" name="form.estado_institucion" :options="$estadosInstitucion" placeholder="Seleccione estado"/>
-        <x-form.input wire:model='form.latitud' label="Latitud" name="form.latitud" type="number" step="any" placeholder="Ingrese latitud"/>
-        <x-form.input wire:model='form.longitud' label="Longitud" name="form.longitud" type="number" step="any" placeholder="Ingrese longitud"/>
+        <x-form.input wire:model='form.latitud' label="Latitud" name="form.latitud" type="text" step="any" placeholder="Ingrese latitud"/>
+        <x-form.input wire:model='form.longitud' label="Longitud" name="form.longitud" type="text" step="any" placeholder="Ingrese longitud"/>
         
         <!-- Input para seleccionar director -->
         <div class="flex w-full max-w-xs flex-col gap-1 text-on-surface dark:text-on-surface-dark">

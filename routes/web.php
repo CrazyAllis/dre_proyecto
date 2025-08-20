@@ -6,9 +6,13 @@ use App\Livewire\Directores\Update;
 use App\Livewire\Instituciones\Create as InstitucionesCreate;
 use App\Livewire\Instituciones\Index as InstitucionesIndex;
 use App\Livewire\Instituciones\Update as InstitucionesUpdate;
+use App\Livewire\Proveedores\Create as ProveedoresCreate;
+use App\Livewire\Proveedores\Index as ProveedoresIndex;
+use App\Livewire\Proveedores\Update as ProveedoresUpdate;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Models\Proveedor;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,5 +41,9 @@ Route::get('instituciones', InstitucionesIndex::class)->name('instituciones.inde
 Route::get('instituciones/create', InstitucionesCreate::class)->name('instituciones.create');
 Route::get('instituciones/{institucion}/edit', InstitucionesUpdate::class)->name('instituciones.edit');
 
+// Proveedores Routes
+Route::get('proveedores', ProveedoresIndex::class)->name('proveedores.index');
+Route::get('proveedores/create', ProveedoresCreate::class)->name('proveedores.create');
+Route::get('proveedores/{proveedor}/edit', ProveedoresUpdate::class)->name('proveedores.edit');
 
 require __DIR__.'/auth.php';

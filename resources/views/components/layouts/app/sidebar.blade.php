@@ -16,6 +16,7 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="user" :href="route('directores.index')" :current="request()->routeIs('directores.*')" wire:navigate>Directores</flux:navlist.item> <!-- Se agrega * a directores.* para que todo lo que este dentro del componente se mantenga seleccionado -->
                     <flux:navlist.item icon="building-library" :href="route('instituciones.index')" :current="request()->routeIs('instituciones.*')" wire:navigate>Instituciones</flux:navlist.item>
+                    <flux:navlist.item icon="building-office-2" :href="route('proveedores.index')" :current="request()->routeIs('proveedores.*')" wire:navigate>Proveedores</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
