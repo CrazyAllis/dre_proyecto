@@ -17,4 +17,10 @@ class Proveedor extends Model
         'correo_contacto',
         'tipo_servicio',
     ];
+
+    // Define la relación con el modelo Servicio
+    public function servicios()
+    {
+        return $this->hasMany(Servicio::class);
+    }
 }

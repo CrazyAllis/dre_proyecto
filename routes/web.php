@@ -9,6 +9,8 @@ use App\Livewire\Instituciones\Update as InstitucionesUpdate;
 use App\Livewire\Proveedores\Create as ProveedoresCreate;
 use App\Livewire\Proveedores\Index as ProveedoresIndex;
 use App\Livewire\Proveedores\Update as ProveedoresUpdate;
+use App\Livewire\Servicios\Create as ServiciosCreate;
+use App\Livewire\Servicios\Index as ServiciosIndex;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -45,5 +47,10 @@ Route::get('instituciones/{institucion}/edit', InstitucionesUpdate::class)->name
 Route::get('proveedores', ProveedoresIndex::class)->name('proveedores.index');
 Route::get('proveedores/create', ProveedoresCreate::class)->name('proveedores.create');
 Route::get('proveedores/{proveedor}/edit', ProveedoresUpdate::class)->name('proveedores.edit');
+
+// Servicios Routes
+Route::get('servicios', ServiciosIndex::class)->name('servicios.index');
+Route::get('servicios/create', ServiciosCreate::class)->name('servicios.create');
+
 
 require __DIR__.'/auth.php';

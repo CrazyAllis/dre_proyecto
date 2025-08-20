@@ -28,4 +28,10 @@ class Institucion extends Model
         {
             return $this->belongsTo(Director::class);
         }
+
+        // Define la relación con el modelo Servicio
+        public function servicios()
+        {
+            return $this->hasMany(Servicio::class);
+        }
 }

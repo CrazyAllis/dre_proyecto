@@ -21,7 +21,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.proveedores.index', [
-            'proveedores' => Proveedor::paginate(10),
+            'proveedores' => Proveedor::latest()->paginate(10),
         ]);
     }
 }
