@@ -18,10 +18,10 @@ class ServicioForm extends Form
 
     // Validación de los campos del formulario
     
+    #[Validate('required', message: 'La institución es obligatoria')]
     public $institucion_id;
     
     #[Validate('required', message: 'El proveedor es obligatorio')]
-    #[Validate('exists:proveedors,id', message: 'El proveedor debe existir')]
     public $proveedor_id;
 
     #[Validate('nullable|date', message: 'La fecha de inicio es obligatoria y debe ser una fecha válida')]
@@ -44,6 +44,19 @@ class ServicioForm extends Form
     #[Validate('nullable|string')]
     public $observaciones;
 
+    public function setServicio(Servicio $servicio)
+    {
+        $this->servicio = $servicio; // Asigna el modelo Servicio a la propiedad
+        $this->institucion_id = $servicio->institucion_id;
+        $this->proveedor_id = $servicio->proveedor_id;
+        $this->fecha_inicio = $servicio->fecha_inicio?->format('Y-m-d'); // Formatea la fecha a 'Y-m-d'
+        $this->fecha_fin = $servicio->fecha_fin?->format('Y-m-d');
+        $this->velocidad_contratada_mbps = $servicio->velocidad_contratada_mbps;
+        $this->costo_mensual = $servicio->costo_mensual;
+        $this->estado_contrato = $servicio->estado_contrato;
+        $this->observaciones = $servicio->observaciones;
+    }
+
     public function store()
     {
         $this->validate(); // Valida los datos del formulario
@@ -58,5 +71,12 @@ class ServicioForm extends Form
             'estado_contrato' => $this->estado_contrato,
             'observaciones' => $this->observaciones,
         ]);
+    }
+
+    public function update()
+    {
+        $this->validate(); // Valida los datos del formulario
+
+        $this->servicio->update($this->all()); // Actualiza el modelo Servicio con los datos del formulario
     }
 }

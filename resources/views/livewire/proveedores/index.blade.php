@@ -72,7 +72,8 @@
                             </svg>
                             Eliminar
                         </button>
-                    </td>
+                        </td>
+                    </tr>
                 @empty
                 <tr>  
                     <td colspan="6" class="p-4 text-center text-sm text-on-surface-strong dark:text-on-surface-dark-strong">

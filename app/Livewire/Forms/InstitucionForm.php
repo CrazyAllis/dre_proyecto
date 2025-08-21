@@ -50,7 +50,7 @@ class InstitucionForm extends Form
     #[Validate('nullable|numeric', message: 'La longitud debe ser un número')]
     public $longitud;
 
-    #[Validate('required|exists:directors,id', message: 'El director es obligatorio')]
+    #[Validate('required', message: 'El director es obligatorio')]
     public $director_id;
 
     public function setInstitucion(Institucion $institucion)

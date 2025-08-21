@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('biens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ie_id')->constrained('institucions')->onDelete('cascade');
+            $table->foreignId('institucion_id')->nullable()->constrained('institucions')->onDelete('set null');
             $table->string('codigo_patrimonial', 50);
             $table->string('tipo_bien', 50)->nullable();
             $table->string('marca', 100);

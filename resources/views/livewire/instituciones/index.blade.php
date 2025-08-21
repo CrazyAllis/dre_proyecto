@@ -47,7 +47,7 @@
             </thead>
             <tbody class="divide-y divide-outline dark:divide-outline-dark">
                 @forelse($instituciones as $institucion)
-                <tr>
+                <tr class="hover:bg-surface-alt dark:hover:bg-surface-dark-alt">
                     <td class="p-4">{{ $institucion->id }}</td>
                     <td class="p-4">{{ $institucion->codigo_modular }}</td>
                     <td class="p-4">{{ $institucion->nombre_ie }}</td>
@@ -101,6 +101,7 @@
                             src="https://www.google.com/maps?q={{ $institucion->latitud }},{{ $institucion->longitud }}&hl=es;z=16&output=embed">
                         </iframe> -->
                     </td> 
+                </tr>
                 @empty
                 <tr>  
                     <td colspan="6" class="p-4 text-center text-sm text-on-surface-strong dark:text-on-surface-dark-strong">

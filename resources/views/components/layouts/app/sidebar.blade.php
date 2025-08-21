@@ -18,6 +18,8 @@
                     <flux:navlist.item icon="building-library" :href="route('instituciones.index')" :current="request()->routeIs('instituciones.*')" wire:navigate>Instituciones</flux:navlist.item>
                     <flux:navlist.item icon="building-office-2" :href="route('proveedores.index')" :current="request()->routeIs('proveedores.*')" wire:navigate>Proveedores</flux:navlist.item>
                     <flux:navlist.item icon="clipboard-document-list" :href="route('servicios.index')" :current="request()->routeIs('servicios.*')" wire:navigate>Servicios</flux:navlist.item>
+                    <flux:navlist.item icon="computer-desktop" :href="route('bienes.index')" :current="request()->routeIs('bienes.*')" wire:navigate>Bienes</flux:navlist.item>
+                    <flux:navlist.item icon="folder" :href="route('detalles.index')" :current="request()->routeIs('detalles.*')" wire:navigate>Detalles</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

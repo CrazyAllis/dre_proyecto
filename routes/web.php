@@ -1,5 +1,11 @@
 <?php
 
+use App\Livewire\Bienes\Create as BienesCreate;
+use App\Livewire\Bienes\Index as BienesIndex;
+use App\Livewire\Bienes\Update as BienesUpdate;
+use App\Livewire\Detalles\Create as DetallesCreate;
+use App\Livewire\Detalles\Index as DetallesIndex;
+use App\Livewire\Detalles\Update as DetallesUpdate;
 use App\Livewire\Directores\Create;
 use App\Livewire\Directores\Index;
 use App\Livewire\Directores\Update;
@@ -11,6 +17,7 @@ use App\Livewire\Proveedores\Index as ProveedoresIndex;
 use App\Livewire\Proveedores\Update as ProveedoresUpdate;
 use App\Livewire\Servicios\Create as ServiciosCreate;
 use App\Livewire\Servicios\Index as ServiciosIndex;
+use App\Livewire\Servicios\Update as ServiciosUpdate;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -51,6 +58,17 @@ Route::get('proveedores/{proveedor}/edit', ProveedoresUpdate::class)->name('prov
 // Servicios Routes
 Route::get('servicios', ServiciosIndex::class)->name('servicios.index');
 Route::get('servicios/create', ServiciosCreate::class)->name('servicios.create');
+Route::get('servicios/{servicio}/edit', ServiciosUpdate::class)->name('servicios.edit');
+
+// Bienes Routes
+Route::get('bienes', BienesIndex::class)->name('bienes.index');
+Route::get('bienes/create', BienesCreate::class)->name('bienes.create');
+Route::get('bienes/{bien}/edit', BienesUpdate::class)->name('bienes.edit');
+
+//Detalles Routes
+Route::get('detalles', DetallesIndex::class)->name('detalles.index');
+Route::get('detalles/create', DetallesCreate::class)->name('detalles.create');
+Route::get('detalles/{detalle}/edit', DetallesUpdate::class)->name('detalles.edit');
 
 
 require __DIR__.'/auth.php';

@@ -17,7 +17,10 @@ class DetalleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'bien_id' => null, // Puede ser null o un ID de Bien existente
+            'tipo_componente' => $this->faker->word(),
+            'descripcion' => $this->faker->sentence(),
+            'estado' => $this->faker->randomElement(['nuevo', 'usado', 'reparado']),
         ];
     }
 }

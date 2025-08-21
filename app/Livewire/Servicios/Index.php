@@ -10,6 +10,13 @@ class Index extends Component
 {
     use WithPagination;
 
+    public function delete(Servicio $servicio)
+    {
+        $servicio->delete(); // Elimina el servicio seleccionado
+
+        session()->flash('status', 'Servicio eliminado correctamente.'); // Mensaje de éxito
+        $this->redirectRoute('servicios.index', navigate: true);
+    }
 
     public function render()
     {

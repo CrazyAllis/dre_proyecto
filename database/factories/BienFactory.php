@@ -17,7 +17,17 @@ class BienFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'institucion_id' => \App\Models\Institucion::factory(),
+            'codigo_patrimonial' => $this->faker->unique()->bothify('BIEN-####'),
+            'tipo_bien' => $this->faker->word(),
+            'marca' => $this->faker->company(),
+            'modelo' => $this->faker->word(),
+            'nro_serie' => $this->faker->unique()->numerify('SN-#####'),
+            'descripcion' => $this->faker->sentence(),
+            'oficina_ubicacion' => $this->faker->city(),
+            'estado' => $this->faker->randomElement(['Nuevo', 'Usado', 'Reparado']),
+            'fecha_adquisicion' => $this->faker->date(),
+            'observaciones' => $this->faker->sentence(),
         ];
     }
 }
