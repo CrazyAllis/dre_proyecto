@@ -10,6 +10,15 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $modalIsOpen = false;
+    public $proveedorSeleccionado;
+
+    public function verProveedor($id)
+    {
+        $this->proveedorSeleccionado = Proveedor::findOrFail($id);
+        $this->modalIsOpen = true;
+    }
+
     public function delete(Proveedor $proveedor)
     {
         $proveedor->delete(); // Elimina el proveedor

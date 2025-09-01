@@ -10,6 +10,15 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $modalIsOpen = false;
+    public $servicioSeleccionado;
+
+    public function verServicio($id)
+    {
+        $this->servicioSeleccionado = Servicio::with(['institucion', 'proveedor'])->findOrFail($id);
+        $this->modalIsOpen = true;
+    }
+
     public function delete(Servicio $servicio)
     {
         $servicio->delete(); // Elimina el servicio seleccionado

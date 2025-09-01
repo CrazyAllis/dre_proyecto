@@ -10,6 +10,15 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $modalIsOpen = false;
+    public $institucionSeleccionada;
+
+    public function verInstitucion($id)
+    {
+        $this->institucionSeleccionada = Institucion::with(['director'])->findOrFail($id);
+        $this->modalIsOpen = true;
+    }
+
     public function delete(Institucion $institucion)
     {
         $institucion->delete(); // Elimina la institución seleccionada

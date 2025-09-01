@@ -24,10 +24,10 @@ class ServicioForm extends Form
     #[Validate('required', message: 'El proveedor es obligatorio')]
     public $proveedor_id;
 
-    #[Validate('nullable|date', message: 'La fecha de inicio es obligatoria y debe ser una fecha válida')]
+    #[Validate('nullable|date')]
     public $fecha_inicio;
 
-    #[Validate('nullable|date', message: 'La fecha de fin debe ser una fecha válida')]
+    #[Validate('nullable|date')]
     public $fecha_fin;
 
     #[Validate('required', message: 'La velocidad contratada es obligatoria')]
@@ -64,8 +64,8 @@ class ServicioForm extends Form
         Servicio::create([
             'institucion_id' => $this->institucion_id,
             'proveedor_id' => $this->proveedor_id,
-            'fecha_inicio' => $this->fecha_inicio,
-            'fecha_fin' => $this->fecha_fin,
+            'fecha_inicio' => $this->fecha_inicio ?: null,
+            'fecha_fin' => $this->fecha_fin ?: null,
             'velocidad_contratada_mbps' => $this->velocidad_contratada_mbps,
             'costo_mensual' => $this->costo_mensual,
             'estado_contrato' => $this->estado_contrato,
@@ -77,6 +77,12 @@ class ServicioForm extends Form
     {
         $this->validate(); // Valida los datos del formulario
 
-        $this->servicio->update($this->all()); // Actualiza el modelo Servicio con los datos del formulario
+        $this->servicio->update(array_merge(
+            $this->all(),
+            [
+                'fecha_inicio' => $this->fecha_inicio ?: null,
+                'fecha_fin' => $this->fecha_fin ?: null,
+            ]
+        )); // Actualiza el modelo Servicio con los datos del formulario
     }
 }

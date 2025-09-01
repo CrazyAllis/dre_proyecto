@@ -10,6 +10,15 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $modalIsOpen = false;
+    public $bienSeleccionado;
+
+    public function verBien($id)
+    {
+        $this->bienSeleccionado = Bien::with(['institucion'])->findOrFail($id);
+        $this->modalIsOpen = true;
+    }
+
     public function delete(Bien $bien)
     {
         $bien->delete(); // Elimina el bien

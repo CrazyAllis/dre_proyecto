@@ -10,6 +10,15 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $modalIsOpen = false;
+    public $directorSeleccionado;
+
+    public function verDirector($id)
+    {
+        $this->directorSeleccionado = Director::findOrFail($id);
+        $this->modalIsOpen = true;
+    }
+
     public function delete(Director $director)
     {
         $director->delete(); // Elimina el director seleccionado
