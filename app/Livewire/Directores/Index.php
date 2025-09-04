@@ -12,6 +12,12 @@ class Index extends Component
 
     public $modalIsOpen = false;
     public $directorSeleccionado;
+    public string $search = ''; // Variable para el término de búsqueda
+
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reinicia la paginación cuando cambias la búsqueda
+    }
 
     public function verDirector($id)
     {
@@ -27,18 +33,36 @@ class Index extends Component
         $this->redirectRoute('directores.index', navigate: true);
     }
 
+    /*
+    public function render()
+    {
+        $q = trim($this->search); // Elimina espacios en blanco al inicio y al final
+    
+        $directores = Director::query()
+            ->when($q !== '', function ($query) use ($q) {
+                $palabras = explode(' ', $q); // Divide la búsqueda en palabras EJM. "Juan Pérez" → ['Juan', 'Pérez']
+    
+                $query->where(function ($subQuery) use ($palabras) {
+                    foreach ($palabras as $palabra) {
+                        $subQuery->where(function ($w) use ($palabra) {
+                            $w->where('nombres', 'like', "%{$palabra}%")
+                              ->orWhere('apellidos', 'like', "%{$palabra}%")
+                              ->orWhere('dni', 'like', "%{$palabra}%");
+                        });
+                    }
+                });
+            })
+            ->latest()
+            ->paginate(10);
+    
+        return view('livewire.directores.index', compact('directores'));
+    }
+    */
+    
     public function render()
     {
         return view('livewire.directores.index', [
-            //'directores' => Director::paginate(10), //metodo para paginar los directores
-            //'directores' => Director::simplePaginate(10) //metodo para paginar los directores de forma simple
-            //'directores' => Director::all() //metodo para obtener todos los directores
-            //'directores' => Director::take(3)->get() // Para llamar solo los primeros 3 directores
-            'directores' => Director::latest()->paginate(10) // Para llamar los directores ordenados por fecha de creación
-            //'directores' => Director::orderBy('name', 'asc')->get() // Para ordenar los directores por nombre en orden ascendente
-            //'directores' => Director::orderBy('name', 'desc')->get() // Para ordenar los directores por nombre en orden descendente
-            //'directores' => Director::where('name', 'like', '%John%')->get() // Para filtrar directores por nombre que contenga 'John'
-            //'directores' => Director::where('created_at', '>=', now()->subDays(30))->get() // Para filtrar directores creados en los últimos
+            'directores' => Director::search($this->search)->latest()->paginate(10)
         ]);
     }
 }
