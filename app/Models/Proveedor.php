@@ -18,6 +18,26 @@ class Proveedor extends Model
         'tipo_servicio',
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        $search = trim($search);
+
+        if ($search === '') {
+            return $query;
+        }
+
+        $palabras = explode(' ', $search);
+
+        return $query->where(function ($subQuery) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $subQuery->where(function ($w) use ($palabra) {
+                    $w->where('nombre', 'like', "%{$palabra}%")
+                    ->orWhere('ruc', 'like', "%{$palabra}%");
+                });
+            }
+        });
+    }
+
     // Define la relación con el modelo Servicio
     public function servicios()
     {

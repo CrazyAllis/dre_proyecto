@@ -12,6 +12,12 @@ class Index extends Component
 
     public $modalIsOpen = false;
     public $proveedorSeleccionado;
+    public string $search = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function verProveedor($id)
     {
@@ -30,7 +36,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.proveedores.index', [
-            'proveedores' => Proveedor::latest()->paginate(10),
+            'proveedores' => Proveedor::search($this->search)->latest()->paginate(10),
         ]);
     }
 }

@@ -12,6 +12,24 @@ class Index extends Component
 
     public $modalIsOpen = false;
     public $institucionSeleccionada;
+    public string $search = ''; // Variable para el término de búsqueda
+    public $nivelSeleccionado = ''; // Variable para el filtro de nivel
+    public $estadoSeleccionado = ''; // Variable para el filtro de estado
+
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reinicia la paginación cuando cambias la búsqueda
+    }
+
+    public function updatingNivelSeleccionado()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingEstadoSeleccionado()
+    {
+        $this->resetPage();
+    }
 
     public function verInstitucion($id)
     {
@@ -30,7 +48,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.instituciones.index', [
-            'instituciones' => Institucion::latest()->paginate(10)
+            'instituciones' => Institucion::search($this->search)
+            ->filterNivel($this->nivelSeleccionado)
+            ->filterEstado($this->estadoSeleccionado)->latest()->paginate(10)
         ]);
     }
 }

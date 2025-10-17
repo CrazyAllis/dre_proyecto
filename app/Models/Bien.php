@@ -29,6 +29,42 @@ class Bien extends Model
         'fecha_adquisicion' => 'date'
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        $search = trim($search);
+
+        if ($search === '') {
+            return $query;
+        }
+
+        $palabras = explode(' ', $search);
+
+        return $query->where(function ($subQuery) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $subQuery->where(function ($w) use ($palabra) {
+                    $w->where('codigo_patrimonial', 'like', "%{$palabra}%")
+                    ->orWhere('tipo_bien', 'like', "%{$palabra}%");
+                });
+            }
+        });
+    }
+
+    public function scopeFilterInstitucion($query, $institucionId)
+    {
+        if ($institucionId) {
+            return $query->where('institucion_id', $institucionId);
+        }
+        return $query;
+    }
+
+    public function scopeFilterEstado($query, $estado)
+    {
+        if ($estado) {
+            return $query->where('estado', $estado);
+        }
+        return $query;
+    }
+
     // Define la relación con el modelo Institucion
     public function institucion()
     {

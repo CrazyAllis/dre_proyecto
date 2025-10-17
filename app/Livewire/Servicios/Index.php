@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Servicios;
 
+use App\Models\Institucion;
+use App\Models\Proveedor;
 use App\Models\Servicio;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,6 +14,30 @@ class Index extends Component
 
     public $modalIsOpen = false;
     public $servicioSeleccionado;
+    public $search = '';
+    public $institucionSeleccionada = '';
+    public $proveedorSeleccionado = '';
+    public $estadoSeleccionado = '';
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingInstitucionSeleccionada()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingProveedorSeleccionado()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingEstadoSeleccionado()
+    {
+        $this->resetPage();
+    }
 
     public function verServicio($id)
     {
@@ -30,7 +56,13 @@ class Index extends Component
     public function render()
     {
         return view('livewire.servicios.index', [
-            'servicios' => Servicio::latest()->paginate(10),
+            'servicios' => Servicio::with(['institucion', 'proveedor'])
+            ->search($this->search)
+            ->filterInstitucion($this->institucionSeleccionada)
+            ->filterProveedor($this->proveedorSeleccionado)
+            ->filterEstado($this->estadoSeleccionado)->latest()->paginate(10),
+            'instituciones' => Institucion::orderBy('nombre_ie')->get(),
+            'proveedores' => Proveedor::orderBy('nombre')->get(),
         ]);
     }
 }

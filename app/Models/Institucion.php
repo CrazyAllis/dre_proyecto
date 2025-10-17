@@ -23,6 +23,45 @@ class Institucion extends Model
         'director_id',
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        $search = trim($search);
+
+        if ($search === '') {
+            return $query;
+        }
+
+        $palabras = explode(' ', $search);
+
+        return $query->where(function ($subQuery) use ($palabras) {
+            foreach ($palabras as $palabra) {
+                $subQuery->where(function ($w) use ($palabra) {
+                    $w->where('codigo_modular', 'like', "%{$palabra}%")
+                    ->orWhere('nombre_ie', 'like', "%{$palabra}%");
+                });
+            }
+        });
+    }
+
+    public function scopeFilterNivel($query, $nivel)
+    {
+        if (!empty($nivel)) {
+            $query->where('nivel', $nivel);
+        }
+
+        return $query;
+    }
+
+    public function scopeFilterEstado($query, $estado)
+    {
+        if (!empty($estado)) {
+            $query->where('estado_institucion', $estado);
+        }
+
+        return $query;
+    }
+
+
     // Define la relación con el modelo Institucion
     public function director()
     {
