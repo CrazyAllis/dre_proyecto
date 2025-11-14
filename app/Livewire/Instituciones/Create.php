@@ -22,7 +22,7 @@ class Create extends Component
     public function render()
     {
         // Obtén la lista de directores desde la base de datos
-        $directores = Director::all();
+        $directores = Director::orderBy('nombres', 'ASC')->get();
 
         // Pasa los directores a la vista
         return view('livewire.instituciones.create', [

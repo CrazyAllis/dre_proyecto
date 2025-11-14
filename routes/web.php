@@ -1,14 +1,19 @@
 <?php
 
 use App\Livewire\Bienes\Create as BienesCreate;
+use App\Livewire\Bienes\FichaRegistro as BienesFichaRegistro;
 use App\Livewire\Bienes\Index as BienesIndex;
 use App\Livewire\Bienes\Update as BienesUpdate;
 use App\Livewire\Detalles\Create as DetallesCreate;
 use App\Livewire\Detalles\Index as DetallesIndex;
 use App\Livewire\Detalles\Update as DetallesUpdate;
 use App\Livewire\Directores\Create;
+use App\Livewire\Directores\FichaRegistro;
 use App\Livewire\Directores\Index;
 use App\Livewire\Directores\Update;
+use App\Livewire\Dres\Create as DresCreate;
+use App\Livewire\Dres\Index as DresIndex;
+use App\Livewire\Dres\Update as DresUpdate;
 use App\Livewire\Instituciones\Create as InstitucionesCreate;
 use App\Livewire\Instituciones\Index as InstitucionesIndex;
 use App\Livewire\Instituciones\Update as InstitucionesUpdate;
@@ -21,7 +26,6 @@ use App\Livewire\Servicios\Update as ServiciosUpdate;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
-use App\Models\Proveedor;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -64,11 +68,18 @@ Route::get('servicios/{servicio}/edit', ServiciosUpdate::class)->name('servicios
 Route::get('bienes', BienesIndex::class)->name('bienes.index');
 Route::get('bienes/create', BienesCreate::class)->name('bienes.create');
 Route::get('bienes/{bien}/edit', BienesUpdate::class)->name('bienes.edit');
+Route::get('bienes/ficha', BienesFichaRegistro::class)->name('bienes.ficha');
 
 //Detalles Routes
 Route::get('detalles', DetallesIndex::class)->name('detalles.index');
 Route::get('detalles/create', DetallesCreate::class)->name('detalles.create');
 Route::get('detalles/{detalle}/edit', DetallesUpdate::class)->name('detalles.edit');
 
+//DRE Routes
+Route::get('dres', DresIndex::class)->name('dres.index');
+Route::get('dres/create', DresCreate::class)->name('dres.create');
+Route::get('dres/{dre}/edit', DresUpdate::class)->name('dres.edit');
+
+Route::get('/directores/ficha', FichaRegistro::class)->name('directores.ficha');
 
 require __DIR__.'/auth.php';

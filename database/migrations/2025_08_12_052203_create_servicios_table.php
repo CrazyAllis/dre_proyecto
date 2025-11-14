@@ -17,10 +17,13 @@ return new class extends Migration
             $table->foreignId('proveedor_id')->nullable()->constrained('proveedors')->onDelete('set null');
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
-            $table->decimal('velocidad_contratada_mbps', 6, 2)->nullable();
+            $table->decimal('velocidad_subida', 6, 2)->nullable();
+            $table->decimal('velocidad_bajada', 6, 2)->nullable();
+            $table->string('entidad_paga', 50)->nullable();
             $table->decimal('costo_mensual', 10, 2)->nullable();
             $table->string('estado_contrato', 50)->nullable();
             $table->text('observaciones')->nullable();
+            $table->string('documento')->nullable();
             $table->timestamps();
         });
     }

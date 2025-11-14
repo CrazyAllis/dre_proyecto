@@ -80,10 +80,13 @@
                     <th scope="col" class="p-4">Proveedor</th>
                     <th scope="col" class="p-4">Fecha Inicio</th>
                     <th scope="col" class="p-4">Fecha Fin</th>
-                    <th scope="col" class="p-4">Velocidad Contratada</th>
+                    <th scope="col" class="p-4">Velocidad de subida</th>
+                    <th scope="col" class="p-4">Velocidad de bajada</th>
+                    <th scope="col" class="p-4">Entidad que paga</th>
                     <th scope="col" class="p-4">Costo mensual</th>
                     <th scope="col" class="p-4">Estado de Contrato</th>
                     <th scope="col" class="p-4">Observaciones</th>
+                    <th scope="col" class="p-4">Documento</th>
                     <th scope="col" class="p-4">Created At</th>
                     <th scope="col" class="p-4">Acciones</th>
                 </tr>
@@ -96,10 +99,24 @@
                     <td class="p-4">{{ $servicio->proveedor ? $servicio->proveedor->nombre : 'No asignado' }}</td>
                     <td class="p-4">{{ $servicio->fecha_inicio?->format('d-m-Y') ?? 'Sin fecha registrada' }}</td>
                     <td class="p-4">{{ $servicio->fecha_fin?->format('d-m-Y') ?? 'Sin fecha registrada' }}</td>
-                    <td class="p-4">{{ $servicio->velocidad_contratada_mbps }} Mbps</td>
+                    <td class="p-4">{{ $servicio->velocidad_subida }} Mbps</td>
+                    <td class="p-4">{{ $servicio->velocidad_bajada }} Mbps</td>
+                    <td class="p-4">{{ $servicio->entidad_paga }}</td>
                     <td class="p-4">S/. {{ $servicio->costo_mensual }}</td>
                     <td class="p-4">{{ $servicio->estado_contrato }}</td>
                     <td class="p-4">{{ $servicio->observaciones }}</td>
+                    <td class="p-4">
+                        @if ($servicio->documento)
+                            <a href="{{ Storage::url($servicio->documento) }}"
+                            target="_blank"
+                            class="text-primary underline hover:opacity-75"
+                            download>
+                            {{ basename($servicio->documento) }}
+                            </a>
+                        @else
+                            <span class="text-gray-500 text-sm">Sin archivo</span>
+                        @endif
+                    </td>
                     <td class="p-4">{{ $servicio->created_at->format('d-m-Y H:i') }}</td>
                     <td class="p-4 flex items-center gap-2">
                         <a href="{{ route('servicios.edit', $servicio) }}" wire:navigate >
@@ -169,7 +186,7 @@
         x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity"
         x-transition:enter-start="opacity-0 scale-50"
         x-transition:enter-end="opacity-100 scale-100"
-        class="flex max-w-lg w-full flex-col gap-4 overflow-hidden rounded-radius border border-outline bg-surface text-on-surface dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark">
+        class="flex max-w-lg w-full flex-col gap-4 overflow-hidden rounded-radius border border-outline bg-surface text-on-surface dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark max-h-[90vh] overflow-y-auto">
 
         <!-- Header -->
         <div class="flex items-center justify-between border-b border-outline bg-surface-alt/60 p-4 dark:border-outline-dark dark:bg-surface-dark/20">
@@ -190,7 +207,9 @@
                 <p><strong>Proveedor:</strong> {{ $servicioSeleccionado->proveedor?->nombre ?? 'No asignado' }}</p>
                 <p><strong>Fecha Inicio:</strong> {{ $servicioSeleccionado->fecha_inicio?->format('d-m-Y') ?? '-' }}</p>
                 <p><strong>Fecha Fin:</strong> {{ $servicioSeleccionado->fecha_fin?->format('d-m-Y') ?? '-' }}</p>
-                <p><strong>Velocidad:</strong> {{ $servicioSeleccionado->velocidad_contratada_mbps }} Mbps</p>
+                <p><strong>Velocidad:</strong> {{ $servicioSeleccionado->velocidad_subida }} Mbps</p>
+                <p><strong>Velocidad de bajada:</strong> {{ $servicioSeleccionado->velocidad_bajada }} Mbps</p>
+                <p><strong>Entidad que paga:</strong> {{ $servicioSeleccionado->entidad_paga }}</p>
                 <p><strong>Costo:</strong> S/. {{ $servicioSeleccionado->costo_mensual }}</p>
                 <p><strong>Estado:</strong> {{ $servicioSeleccionado->estado_contrato }}</p>
                 <p><strong>Observaciones:</strong> {{ $servicioSeleccionado->observaciones ?? '-' }}</p>
@@ -215,6 +234,5 @@
     </div>
     </div>
 </div>
-
 
 </div>

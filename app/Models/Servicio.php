@@ -15,10 +15,13 @@ class Servicio extends Model
         'proveedor_id',
         'fecha_inicio',
         'fecha_fin',
-        'velocidad_contratada_mbps',
+        'velocidad_subida',
+        'velocidad_bajada',
+        'entidad_paga',
         'costo_mensual',
         'estado_contrato',
         'observaciones',
+        'documento',
     ];
 
     // Esto convierte automáticamente a Carbon

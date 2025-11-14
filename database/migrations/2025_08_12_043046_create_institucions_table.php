@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('institucions', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo_modular', 20);
-            $table->string('nombre_ie', 150);
-            $table->string('nivel', 50);
-            $table->string('distrito', 100);
-            $table->string('provincia', 100);
-            $table->string('direccion', 150);
-            $table->string('estado_institucion', 50);
+            $table->string('codigo_modular', 20)->nullable();
+            $table->string('nombre_ie', 150)->nullable();
+            $table->string('nivel', 50)->nullable();
+            $table->string('distrito', 100)->nullable();
+            $table->string('provincia', 100)->nullable();
+            $table->string('direccion', 150)->nullable();
+            $table->string('estado_institucion', 50)->nullable();
             $table->decimal('latitud', 18, 15)->nullable();
             $table->decimal('longitud', 18, 15)->nullable();
             $table->foreignId('director_id')->nullable()->constrained('directors')->onDelete('set null');

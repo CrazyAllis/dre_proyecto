@@ -6,9 +6,12 @@ use App\Livewire\Forms\ServicioForm;
 use App\Models\Institucion;
 use App\Models\Proveedor;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
     public ServicioForm $form;
 
     public function save()
@@ -23,13 +26,14 @@ class Create extends Component
     public function render()
     {
 
-        $instituciones = Institucion::all();
-        $proveedores = Proveedor::all();
+        $instituciones = Institucion::orderBy('nombre_ie', 'ASC')->get();
+        $proveedores = Proveedor::orderBy('nombre', 'ASC')->get();
 
         return view('livewire.servicios.create', [
             'instituciones' => $instituciones,
             'proveedores' => $proveedores,
             'estadosContrato' => $this->form->estadosContrato,
+            'entidadesPago' => $this->form->entidadesPago,
         ]);
     }
 }

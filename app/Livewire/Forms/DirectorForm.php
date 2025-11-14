@@ -16,10 +16,12 @@ class DirectorForm extends Form
     #[Validate('max:255')]
     public $nombres;
 
-    #[Validate('required|string|max:255')]
+    #[Validate('required', message: 'Los apellidos son obligatorios')]
+    #[Validate('string')]
+    #[Validate('max:255')]
     public $apellidos;
 
-    #[Validate('required')]
+    #[Validate('required', message: 'El DNI es obligatorio')]
     #[Validate('numeric', message: 'El DNI debe ser numérico')]
     #[Validate('digits:8', message: 'El DNI debe tener 8 dígitos')]
     public $dni;

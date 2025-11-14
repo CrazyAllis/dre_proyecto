@@ -21,11 +21,6 @@ class Create extends Component
 
     public function render()
     {
-        $bienes = Bien::all();
-
-        return view('livewire.detalles.create', [
-            'bienes' => $bienes,
-            'estadosDetalle' => $this->form->estadosDetalle,
-        ]);
+        return view('livewire.detalles.create');
     }
 }

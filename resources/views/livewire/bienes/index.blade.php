@@ -34,7 +34,7 @@
             <input wire:model.live.debounce.300ms="search" 
             type="search" class="w-full rounded-radius border border-outline bg-surface-alt py-2 pl-10 pr-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-75 dark:border-outline-dark dark:bg-surface-dark-alt/50 dark:focus-visible:outline-primary-dark" 
             name="search" 
-            placeholder="Codigo Patrimonial, Tipo de bien" 
+            placeholder="Codigo Patrimonial..." 
             aria-label="search"/>
         </div>
 
@@ -68,10 +68,15 @@
                     <th scope="col" class="p-4">BienID</th>
                     <th scope="col" class="p-4">Institución</th>
                     <th scope="col" class="p-4">Codigo Patrimonial</th>
+                    <th scope="col" class="p-4">Oficina: Responsable</th>
                     <th scope="col" class="p-4">Tipo de bien</th>
                     <th scope="col" class="p-4">Marca</th>
                     <th scope="col" class="p-4">Modelo</th>
                     <th scope="col" class="p-4">Número de serie</th>
+                    <th scope="col" class="p-4">Procesador</th>
+                    <th scope="col" class="p-4">RAM</th>
+                    <th scope="col" class="p-4">Almacenamiento</th>
+                    <th scope="col" class="p-4">Capacidad de almacenamiento</th>
                     <th scope="col" class="p-4">Descripción</th>
                     <th scope="col" class="p-4">Oficina/Area</th>
                     <th scope="col" class="p-4">Estado</th>
@@ -87,10 +92,15 @@
                         <td class="p-4">{{ $bien->id }}</td>
                         <td class="p-4">{{ $bien->institucion ? $bien->institucion->nombre_ie : 'No asignado' }}</td>
                         <td class="p-4">{{ $bien->codigo_patrimonial }}</td>
-                        <td class="p-4">{{ $bien->tipo_bien }}</td>
+                        <td class="p-4">{{ $bien->dre ? $bien->dre->oficina . ' : ' . $bien->dre->responsable : 'No asignado' }}</td>
+                        <td class="p-4">{{ $bien->detalle ? $bien->detalle->tipo_componente : 'No asignado' }}</td>
                         <td class="p-4">{{ $bien->marca }}</td>
                         <td class="p-4">{{ $bien->modelo }}</td>
                         <td class="p-4">{{ $bien->nro_serie }}</td>
+                        <td class="p-4">{{ $bien->procesador }}</td>
+                        <td class="p-4">{{ $bien->ram }} </td>
+                        <td class="p-4">{{ $bien->tipo_almacenamiento }}</td>
+                        <td class="p-4">{{ $bien->capacidad_almacenamiento }}</td>
                         <td class="p-4">{{ $bien->descripcion }}</td>
                         <td class="p-4">{{ $bien->oficina_ubicacion }}</td>
                         <td class="p-4">{{ $bien->estado }}</td>
@@ -163,12 +173,12 @@
         x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity"
         x-transition:enter-start="opacity-0 scale-50"
         x-transition:enter-end="opacity-100 scale-100"
-        class="flex max-w-lg w-full flex-col gap-4 overflow-hidden rounded-radius border border-outline bg-surface text-on-surface dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark">
+        class="flex max-w-lg w-full flex-col gap-4 overflow-hidden rounded-radius border border-outline bg-surface text-on-surface dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark max-h-[90vh] overflow-y-auto">
 
         <!-- Header -->
         <div class="flex items-center justify-between border-b border-outline bg-surface-alt/60 p-4 dark:border-outline-dark dark:bg-surface-dark/20">
             <h3 class="font-semibold tracking-wide text-on-surface-strong dark:text-on-surface-dark-strong">
-                Detalle del Servicio
+                Detalles del Bien
             </h3>
             <button wire:click="$set('modalIsOpen', false)" aria-label="close modal">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" stroke="currentColor" fill="none" stroke-width="1.4" class="w-5 h-5">
@@ -183,11 +193,16 @@
                 <p><strong>BienID:</strong> {{ $bienSeleccionado->id }}</p>
                 <p><strong>Institución:</strong> {{ $bienSeleccionado->institucion ? $bienSeleccionado->institucion->nombre_ie : 'No asignado' }}</p>
                 <p><strong>Código Patrimonial:</strong> {{ $bienSeleccionado->codigo_patrimonial }}</p>
-                <p><strong>Tipo de bien:</strong> {{ $bienSeleccionado->tipo_bien }}</p>
+                <p><strong>Oficina: Responsable:</strong>{{ $bienSeleccionado->dre ? $bienSeleccionado->dre->oficina . ' : ' . $bienSeleccionado->dre->responsable : 'No asignado' }}</p>
+                <p><strong>Tipo de bien:</strong> {{ $bienSeleccionado->detalle ? $bienSeleccionado->detalle->tipo_componente : 'No asignado' }}</p>
                 <p><strong>Marca:</strong> {{ $bienSeleccionado->marca }}</p>
                 <p><strong>Modelo:</strong> {{ $bienSeleccionado->modelo }}</p>
                 <p><strong>Número de serie:</strong> {{ $bienSeleccionado->nro_serie }}</p>
-                <p><strong>Descripción:</strong> {{ $bienSeleccionado->descripcion }}</p>
+                <p><strong>Procesador:</strong> {{ $bienSeleccionado->procesador }}</p>
+                <p><strong>RAM:</strong> {{ $bienSeleccionado->ram }}</p>
+                <p><strong>Tipo de almacenamiento:</strong> {{ $bienSeleccionado->tipo_almacenamiento }}</p>
+                <p><strong>Capacidad de almacenamiento:</strong> {{ $bienSeleccionado->capacidad_almacenamiento }}</p>
+                <p><strong>Descripción:</strong> {{ $bienSeleccionado->descripcion ?? '-' }}</p>
                 <p><strong>Oficina/Área:</strong> {{ $bienSeleccionado->oficina_ubicacion }}</p>
                 <p><strong>Estado:</strong> {{ $bienSeleccionado->estado }}</p>
                 <p><strong>Fecha de adquisición:</strong> {{ $bienSeleccionado->fecha_adquisicion?->format('d-m-Y') ?? 'Sin fecha registrada' }}</p>

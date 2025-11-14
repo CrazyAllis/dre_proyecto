@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('detalles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bien_id')->nullable()->constrained('biens')->onDelete('set null');
-            $table->string('tipo_componente', 50)->nullable();
-            $table->text('descripcion')->nullable();
-            $table->string('estado', 50)->nullable();
+            $table->string('tipo_componente', 100)->nullable();
             $table->timestamps();
         });
     }

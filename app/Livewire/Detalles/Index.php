@@ -16,7 +16,7 @@ class Index extends Component
 
     public function verDetalle($id)
     {
-        $this->detalleSeleccionado = Detalle::with(['bien'])->findOrFail($id);
+        $this->detalleSeleccionado = Detalle::findOrFail($id);
         $this->modalIsOpen = true;
     }
 

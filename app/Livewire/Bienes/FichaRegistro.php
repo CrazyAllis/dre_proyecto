@@ -3,14 +3,16 @@
 namespace App\Livewire\Bienes;
 
 use App\Livewire\Forms\BienForm;
+use App\Models\Bien;
 use App\Models\Detalle;
 use App\Models\Dre;
 use App\Models\Institucion;
 use Livewire\Component;
 
-class Create extends Component
+class FichaRegistro extends Component
 {
     public BienForm $form;
+    public $bienesTemp = [];
 
     public function getMostrarSpecsProperty()
     {
@@ -28,17 +30,12 @@ class Create extends Component
 
     public function detalleChanged($detalleId)
     {
-        // Asigno el valor al form (por si acaso)
         $this->form->detalle_id = $detalleId;
-
-        // Forzamos re-render si necesitas recomputar getters — Livewire re-renderiza automáticamente
-        // Puedes dejarlo vacío o si quieres ejecutar lógica adicional, hazlo aquí.
 
         $detalle = Detalle::find($detalleId);
 
         $esLaptopPC = $detalle && in_array($detalle->tipo_componente, ['Laptop', 'PC escritorio']);
     
-        // Si ahora NO es Laptop ni PC, limpiar campos técnicos
         if (!$esLaptopPC) {
             $this->form->procesador = null;
             $this->form->ram = null;
@@ -65,22 +62,59 @@ class Create extends Component
         }
     }
 
-    public function save()
+    public function agregarBien()
     {
-        $this->form->store(); // Llama al método store del formulario BienForm
+        // Validamos con las reglas del form
+        $this->form->validate();
 
-        // Redireccionar con Livewire sin refrescar toda la pagina con el parametro navigate
-        session()->flash('status', 'Bien creado exitosamente.');
-        $this->redirectRoute('bienes.index', navigate: true);
+        // Agregamos a la lista temporal
+        $this->bienesTemp[] = [
+            'institucion_id' => $this->form->institucion_id,
+            'codigo_patrimonial' => $this->form->codigo_patrimonial,
+            'dre_id' => $this->form->dre_id,
+            'detalle_id' => $this->form->detalle_id,
+            'marca' => $this->form->marca,
+            'modelo' => $this->form->modelo,
+            'nro_serie' => $this->form->nro_serie,
+            'procesador' => $this->form->procesador,
+            'ram' => $this->form->ram,
+            'tipo_almacenamiento' => $this->form->tipo_almacenamiento,
+            'capacidad_almacenamiento' => $this->form->capacidad_almacenamiento,
+            'descripcion' => $this->form->descripcion,
+            'oficina_ubicacion' => $this->form->oficina_ubicacion,
+            'estado' => $this->form->estado,
+            'fecha_adquisicion' => $this->form->fecha_adquisicion,
+            'observaciones' => $this->form->observaciones,
+        ];
+
+        // Limpiamos los campos del form (pero sin perder instancia)
+        $this->form->reset();
     }
+
+    public function eliminarBien($index)
+    {
+        unset($this->bienesTemp[$index]);
+        $this->bienesTemp = array_values($this->bienesTemp); // reindexar
+    }
+
+    public function guardarTodo()
+    {
+        foreach ($this->bienesTemp as $bienData) {
+            Bien::create($bienData);
+        }
+
+        $this->bienesTemp = [];
+        session()->flash('status', 'Todos los datos fueron guardados exitosamente.');
+    }
+
 
     public function render()
     {
         $instituciones = Institucion::orderBy('nombre_ie', 'ASC')->get();
         $detalles = Detalle::orderBy('tipo_componente', 'ASC')->get();
         $dres = Dre::orderBy('oficina', 'ASC')->get();
-
-        return view('livewire.bienes.create', [
+        
+        return view('livewire.bienes.ficha-registro', [
             'instituciones' => $instituciones,
             'detalles' => $detalles,
             'dres' => $dres,

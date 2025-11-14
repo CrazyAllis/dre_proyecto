@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Detalle extends Model
+class Dre extends Model
 {
-    /** @use HasFactory<\Database\Factories\DetalleFactory> */
+    /** @use HasFactory<\Database\Factories\DreFactory> */
     use HasFactory;
 
     protected $fillable = [
-        'tipo_componente',
+        'oficina',
+        'responsable',
     ];
 
     public function bienes()
     {
         return $this->hasMany(Bien::class);
     }
+
 }

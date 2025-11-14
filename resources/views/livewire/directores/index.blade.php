@@ -1,5 +1,5 @@
 <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-
+    
     @if (session('status'))
         <!-- success Alert -->
         <div x-data="{ alertIsVisible: true }" x-show="alertIsVisible" class="relative w-full overflow-hidden rounded-radius border border-success bg-surface text-on-surface dark:bg-surface-dark dark:text-on-surface-dark" role="alert" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90">
@@ -23,7 +23,7 @@
     @endif
 
     <a href="{{ route('directores.create') }}" wire:navigate class="w-fit whitespace-nowrap rounded-radius bg-primary border border-primary px-4 py-2 text-center text-sm font-medium tracking-wide text-on-primary transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 disabled:cursor-not-allowed disabled:opacity-75 dark:border-primary-dark dark:bg-primary-dark dark:text-on-primary-dark dark:focus-visible:outline-primary-dark" role="button">
-        Agregar Director
+        Agregar Responsable
     </a>
 
     <div class="flex items-center gap-2">
@@ -43,7 +43,7 @@
         <table class="w-full text-left text-sm text-on-surface dark:text-on-surface-dark">
             <thead class="border-b border-outline bg-surface-alt text-sm text-on-surface-strong dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark-strong">
                 <tr>
-                    <th scope="col" class="p-4">DirectorID</th>
+                    <th scope="col" class="p-4">ResponsableID</th>
                     <th scope="col" class="p-4">Nombres</th>
                     <th scope="col" class="p-4">Apellidos</th>
                     <th scope="col" class="p-4">DNI</th>

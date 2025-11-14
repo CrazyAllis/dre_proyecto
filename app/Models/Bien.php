@@ -13,10 +13,15 @@ class Bien extends Model
     protected $fillable = [
         'institucion_id',
         'codigo_patrimonial',
-        'tipo_bien',
+        'dre_id',
+        'detalle_id',
         'marca',
         'modelo',
         'nro_serie',
+        'procesador',
+        'ram',
+        'tipo_almacenamiento',
+        'capacidad_almacenamiento',
         'descripcion',
         'oficina_ubicacion',
         'estado',
@@ -42,8 +47,7 @@ class Bien extends Model
         return $query->where(function ($subQuery) use ($palabras) {
             foreach ($palabras as $palabra) {
                 $subQuery->where(function ($w) use ($palabra) {
-                    $w->where('codigo_patrimonial', 'like', "%{$palabra}%")
-                    ->orWhere('tipo_bien', 'like', "%{$palabra}%");
+                    $w->where('codigo_patrimonial', 'like', "%{$palabra}%");
                 });
             }
         });
@@ -72,8 +76,14 @@ class Bien extends Model
     }
 
     // Define la relación con el modelo Detalle
-    public function detalles()
+    public function detalle()
     {
-        return $this->hasMany(Detalle::class);
+        return $this->belongsTo(Detalle::class);
+    }
+
+    // Define la relación con el modelo Dre
+    public function dre()
+    {
+        return $this->belongsTo(Dre::class);
     }
 }

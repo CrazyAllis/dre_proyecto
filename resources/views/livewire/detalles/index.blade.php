@@ -23,18 +23,15 @@
     @endif
 
     <a href="{{ route('detalles.create') }}" wire:navigate class="w-fit whitespace-nowrap rounded-radius bg-primary border border-primary px-4 py-2 text-center text-sm font-medium tracking-wide text-on-primary transition hover:opacity-75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:opacity-100 active:outline-offset-0 disabled:cursor-not-allowed disabled:opacity-75 dark:border-primary-dark dark:bg-primary-dark dark:text-on-primary-dark dark:focus-visible:outline-primary-dark" role="button">
-        Agregar Detalle
+        Agregar Componente
     </a>
 
     <div class="overflow-hidden w-full overflow-x-auto rounded-lg border border-neutral-300 dark:border-neutral-700">
         <table class="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
             <thead class="border-b border-neutral-300 bg-neutral-50 text-sm text-neutral-900 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white">
                 <tr>
-                    <th scope="col" class="p-4">DetalleID</th>
-                    <th scope="col" class="p-4">Bien Tecnológico</th>
+                    <th scope="col" class="p-4">ComponenteID</th>
                     <th scope="col" class="p-4">Tipo de componente</th>
-                    <th scope="col" class="p-4">Descripción</th>
-                    <th scope="col" class="p-4">Estado</th>
                     <th scope="col" class="p-4">Created At</th>
                     <th scope="col" class="p-4">Acciones</th>
                 </tr>
@@ -43,10 +40,7 @@
                 @forelse($detalles as $detalle)
                     <tr class="hover:bg-surface-alt dark:hover:bg-surface-dark-alt">
                         <td class="p-4">{{ $detalle->id }}</td>
-                        <td class="p-4">{{ $detalle->bien ? $detalle->bien->codigo_patrimonial : 'No asignado' }}</td>
                         <td class="p-4">{{ $detalle->tipo_componente }}</td>
-                        <td class="p-4">{{ $detalle->descripcion }}</td>
-                        <td class="p-4">{{ $detalle->estado }}</td>
                         <td class="p-4">{{ $detalle->created_at->format('d-m-Y H:i') }}</td>
                         <td class="p-4 flex items-center gap-2">
                             <a href="{{ route('detalles.edit', $detalle) }}" wire:navigate >
@@ -132,11 +126,8 @@
         <!-- Body -->
         <div class="px-4 py-6 space-y-2">
             @if($detalleSeleccionado)
-                <p><strong>Detalle ID:</strong> {{ $detalleSeleccionado->id }}</p>
-                <p><strong>Bien Tecnológico:</strong> {{ $detalleSeleccionado->bien ? $detalleSeleccionado->bien->codigo_patrimonial : 'No asignado' }}</p>
+                <p><strong>Componente ID:</strong> {{ $detalleSeleccionado->id }}</p>
                 <p><strong>Tipo de componente:</strong> {{ $detalleSeleccionado->tipo_componente }}</p>
-                <p><strong>Descripción:</strong> {{ $detalleSeleccionado->descripcion }}</p>
-                <p><strong>Estado:</strong> {{ $detalleSeleccionado->estado }}</p>
                 <p><strong>Fecha de Creación:</strong> {{ $detalleSeleccionado->created_at->format('d-m-Y H:i') }}</p>
                 <p><strong>Última Actualización:</strong> {{ $detalleSeleccionado->updated_at->format('d-m-Y H:i') }}</p>
             @endif

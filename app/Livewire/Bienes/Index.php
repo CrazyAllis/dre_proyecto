@@ -48,7 +48,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.bienes.index', [
-            'bienes' => Bien::with('institucion')
+            'bienes' => Bien::with('institucion','detalle', 'dre')
             ->search($this->search)
             ->filterInstitucion($this->institucionSeleccionada)
             ->filterEstado($this->estadoSeleccionado)->latest()->paginate(10),
